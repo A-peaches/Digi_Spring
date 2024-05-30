@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+<!-- 	<bean id="family" class="kr.soft.study.Family">
+		<constructor-arg value="아뽜"/>
+		<constructor-arg value="옴뫄"/>
+		<constructor-arg value="온니"/>
+		<constructor-arg value="오뽜"/>
+	</bean> -->
+<!-- 		<bean id="family" class="kr.soft.study.Family">
+			<constructor-arg value="아뽜"/>
+			<constructor-arg value="옴뫄"/>
+			<property name="sisterName" value="온뉘"/>
+			<property name="brotherName" value="오뽜"/>
+		</bean>
+	 -->
+	 
+	 <bean id="family" class="kr.soft.study.Family" c:papaName="아뽜" c:mamiName="옴뫄"
+	 p:brotherName="오뽜" p:sisterName="온뉘"/>
+	 
+
+	
+</beans>
