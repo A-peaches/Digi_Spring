@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+	<context:annotation-config/>
+
+	<bean id="initSampleData" class="kr.soft.contact.utils.InitSampleData"> 
+	<!-- 샘플 데이터 -->
+		<property name="names">
+			<list>
+				<value>김피피</value>
+				<value>김치치</value>
+				<value>김포포</value>
+			</list>
+		</property>
+		<property name="phoneNumbers">
+			<list>
+				<value>010-1111-1004</value>
+				<value>010-2222-1004</value>
+				<value>010-3333-1004</value>
+			</list>
+		</property>
+	</bean>
+	
+	
+	<bean id="contactDao" class="kr.soft.contact.dao.ContactDao"/>
+	<!-- DAO객체생성 -->
+	
+	<bean id="registerService" class="kr.soft.contact.service.ContactRegisterService"/>
+	<bean id="searchService" class="kr.soft.contact.service.ContactSearchService"/>
+</beans>
