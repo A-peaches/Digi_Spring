@@ -16,7 +16,7 @@ public class MainClass {
 //		AbstractApplicationContext ctx = new GenericXmlApplicationContext(configList);
 //		AbstractApplicationContext ctx = new GenericXmlApplicationContext("classpath:applicationCTXImport.xml");
 		AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(ApplicationConfig.class);
-		
+//		
 		Student student1 = ctx.getBean("student1", Student.class);
 		System.out.println(student1.getName()); // 홍길동
 		System.out.println(student1.getHobbys()); // 수영, 요리

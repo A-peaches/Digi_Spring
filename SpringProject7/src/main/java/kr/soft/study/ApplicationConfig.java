@@ -5,8 +5,10 @@ import java.util.ArrayList;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.ImportResource;
 
 @Configuration
+@ImportResource("classpath:applicationCTX.xml")
 public class ApplicationConfig {
 
 	@Bean 
@@ -20,17 +22,7 @@ public class ApplicationConfig {
 		return student;
 	}
 	
-	@Bean 
-	public Student student3() {
-		ArrayList<String> hobbys = new ArrayList<String>();
-		hobbys.add("º¹¼þ¾Æ ¸Ô±â");
-		hobbys.add("º¹¼þ¾Æ ¼îÇÎ");
-		
-		Student student = new Student("±èÄ¡Ä¡",hobbys);
-		
-		return student;
-	}
-	
+
 	@Bean 
 	public StudentInfo studentInfo1() {
 		

@@ -1,0 +1,40 @@
+package kr.soft.study;
+
+import java.util.ArrayList;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.ImportResource;
+
+@Configuration //½ºÇÁ¸µ ¼³Á¤¿¡ »ç¿ëµÇ´Â Å¬·¡½º.
+@ImportResource("classpath:applicationCTX.xml")
+public class ApplicationConfig {
+	
+	@Bean //³ªºóÁî¾ç
+	public Student student1() {
+		ArrayList<String> hobbys = new ArrayList<String>();
+		hobbys.add("º¹¼þ¾Æ ¸Ô±ë");
+		hobbys.add("º¹¼þ¾Æ ±×¸®±â");
+		
+		Student student = new Student("±èÇÇÇÇ",5,hobbys);
+		student.setHeight(30);
+		student.setWeight(1);
+		
+		return student;
+	}
+	
+	
+//	@Bean //³ªºóÁî¾ç
+//	public Student student2() {
+//		ArrayList<String> hobbys = new ArrayList<String>();
+//		hobbys.add("º¹¼þ¾Æ Å°¿ì±â");
+//		hobbys.add("º¹¼þ¾Æ °¡Áö±¸ ³î±â");
+//		
+//		Student student = new Student("±èÄ¡Ä¡",4,hobbys);
+//		student.setHeight(28);
+//		student.setWeight(0.5);
+//		
+//		return student;
+//	}
+//	
+}
