@@ -11,14 +11,14 @@
 	<bean class="kr.soft.study.ApplicationConfig"/>
 
 
-	<bean id="student2" class="kr.soft.study.Student" c:name="김치치" c:age="4">
+	<bean id="student2" class="kr.soft.study.Student" c:name="김치치" c:age="4" p:height="28">
 		<constructor-arg>
 			<list>
 				<value>복숭아 키우기</value>
 				<value>복숭아 가지구 놀기</value>
 			</list>
 		</constructor-arg>
-		<property name="height" value="28"/>
 		<property name="weight" value="0.5"/>
 	</bean>
+	
 </beans>

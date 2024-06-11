@@ -9,7 +9,7 @@
 	
 <!-- 	<context:annotation-config/> -->
 	
-	<bean id="student" p:name ="김피피" p:age="5" class="kr.soft.study.Student" scope="prototype">
+	<bean id="student" p:name ="김피피" p:age="5" class="kr.soft.study.Student" scope="singleton">
 		<property name="height" value="28"/>
 		<property name="weight" value="0.5"/>
 		<property name="hobbys">

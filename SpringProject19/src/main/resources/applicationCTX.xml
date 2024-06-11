@@ -1,0 +1,49 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+<!-- 	<aop:aspectj-autoproxy/>
+	<bean id="logAop" class="kr.soft.study.LogAop_Annotation"/>
+	 -->
+	 
+	<bean id="logAop" class="kr.soft.study.LogAop"/>
+	 	
+	<aop:config>
+		<aop:aspect id="logger" ref="logAop" >
+			<aop:pointcut id="publicM" expression="within(kr.soft.study.*)" />
+			<aop:around pointcut-ref="publicM" method="loggerAop" />
+		</aop:aspect>
+		
+		<aop:aspect id="logger" ref="logAop" >
+			<aop:pointcut id="publicM" expression="within(kr.soft.study.Student)" />
+			<aop:before pointcut-ref="publicM" method="beforeAdvice" />
+		</aop:aspect>
+		
+		<aop:aspect id="logger" ref="logAop" >
+			<aop:pointcut id="publicM" expression="within(kr.soft.study.Worker)" />
+			<aop:after pointcut-ref="publicM" method="afterAdvice" />
+		</aop:aspect>
+		
+	</aop:config>
+	
+	<bean id="student" class="kr.soft.study.Student">
+		<property name="name" value="피피"/>
+		<property name="age" value="5"/>
+		<property name="gradeNum" value="3"/>
+		<property name="classNum" value="1"/>	
+	</bean>
+	
+	<bean id="worker" class="kr.soft.study.Worker">
+		<property name="name" value="치치"/>
+		<property name="age" value="4"/>
+		<property name="job" value="복숭아농장주"/>
+	</bean>
+
+
+
+</beans>
+

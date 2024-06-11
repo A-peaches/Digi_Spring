@@ -21,11 +21,7 @@ public class MainClass {
 		
 		System.out.println("이름 : " + student1.getName());
 		System.out.println("나이 : " + student1.getAge());
-//		
-//		System.out.println("==========================");
-//		
-//		System.out.println("이름 : " + student2.getName());
-//		System.out.println("나이 : " + student2.getAge());
+		
 		
 		if(student1.equals(student2)) {
 			System.out.println("student1 == student2");

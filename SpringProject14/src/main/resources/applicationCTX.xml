@@ -5,21 +5,37 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 
+
 	<context:property-placeholder
-		location="classpath:admin.properties, classpath:sub_admin.properties"/>
-		
+    location="classpath:admin.properties, classpath:sub_admin.properties"/>
+	<!-- 스프링 컨텍스트에서 property-placeholder를 사용하여 외부 properties 파일을 로드합니다. -->
+	
 	<bean id="adminConnection" class="kr.soft.study.AdminConnection">
+		<!-- AdminConnection 빈 정의 -->
+
 		<property name="adminId">
+			<!-- adminId 프로퍼티 설정 -->
 			<value>${admin.id}</value>
+			<!-- ${admin.id}는 admin.properties 파일에서 admin.id 값을 참조 -->
 		</property>
+
 		<property name="adminPw">
+			<!-- adminPw 프로퍼티 설정 -->
 			<value>${admin.pw}</value>
+			<!-- ${admin.pw}는 admin.properties 파일에서 admin.pw 값을 참조 -->
 		</property>
+
 		<property name="sub_adminId">
+			<!-- sub_adminId 프로퍼티 설정 -->
 			<value>${sub_admin.id}</value>
+			<!-- ${sub_admin.id}는 sub_admin.properties 파일에서 sub_admin.id 값을 참조 -->
 		</property>
+
 		<property name="sub_adminPw">
+			<!-- sub_adminPw 프로퍼티 설정 -->
 			<value>${sub_admin.pw}</value>
+			<!-- ${sub_admin.pw}는 sub_admin.properties 파일에서 sub_admin.pw 값을 참조 -->
 		</property>
 	</bean>
+
 </beans>
