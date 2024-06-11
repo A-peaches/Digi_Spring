@@ -3,15 +3,21 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<bean id="calculator" class="kr.soft.study.Calculator">
-
-	</bean>
+	<!-- calculator 객체 생성. -->
+	<bean id="calculator" class="kr.soft.study.Calculator"></bean>
 	
+	<!-- myCalculator 객체 생성. -->
+	<!-- property 태그는 setter 메서드와 동일한 역할을 합니다 -->
 	<bean id="myCalculator" class="kr.soft.study.MyCalculator">
+	
+		 <!-- name 속성은 클래스의 필드명과 동일해야 하며, 위에서 생성한 calculator 객체를 주입합니다 -->
 		<property name="calculator">
 			<ref bean="calculator"/>
 		</property>
+		
+		<!-- 숫자나 문자 데이터는 value 속성을 통해 입력합니다 -->
 		<property name="firstNum" value="10"></property>
 		<property name="secondNum" value="2"/>
 	</bean>
+	
 </beans>

@@ -9,8 +9,13 @@ public class MainClass {
 		
 //		String configLocation = "classpath:applicationCTX.xml";
 //		AbstractApplicationContext ctx = new GenericXmlApplicationContext(configLocation);
-		AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(ApplicationConfig.class);
 		
+//		ApplicationConfig 클래스 파일이 애플리케이션 컨텍스트 그 자체는 아니지만, 
+//		애플리케이션 컨텍스트를 구성하는 설정 정보를 제공합니다. 
+//		AnnotationConfigApplicationContext는 이 설정 클래스를 사용하여 컨텍스트를 초기화하고, 빈들을 관리합니다
+		AnnotationConfigApplicationContext ctx 
+		= new AnnotationConfigApplicationContext(ApplicationConfig.class);
+
 		StudentInfo studentInfo = ctx.getBean("studentInfo",StudentInfo.class);
 		studentInfo.getStudentInfo();
 		
@@ -19,3 +24,4 @@ public class MainClass {
 		studentInfo.getStudentInfo();
 	}
 }
+

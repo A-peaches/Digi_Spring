@@ -3,6 +3,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 	
+	<!-- naver의 BMI 정보를 사용하여 BMICalculator 객체를 초기화 -->
 	<bean id="bmiCalculator" class="kr.soft.study.BMICalculator">
 		<property name="lowWeight" value="18.5"/>
 		<property name="normal" value="23"/>
@@ -10,19 +11,20 @@
 		<property name="obesity" value="30"/>
 	</bean>
 	
+	<!-- 위에서 생성한 bmiCalculator 객체를 주입하여 MyInfo 객체를 생성 -->
 	<bean id="myInfo" class="kr.soft.study.MyInfo">
 		<property name="bmiCalculator">
 			<ref bean="bmiCalculator"/>
 		</property>
-		<property name="hobbys">
+		<property name="hobbies">
 			<list>
-				<value>게임</value>
-				<value>운동</value>
-				<value>웹툰</value>
+				<value>복숭아 먹기</value>
+				<value>복숭아 그리기</value>
+				<value>복숭아 가지고 놀기</value>
 			</list>
 		</property>
-		<property name="name" value="김근미"/>
-		<property name="weight" value="49"/>
-		<property name="height" value="159"/>
+		<property name="name" value="피피"/>
+		<property name="weight" value="5"/>
+		<property name="height" value="30"/>
 	</bean>
 </beans>

@@ -6,14 +6,14 @@ public class MyInfo {
 	private String name;
 	private double height;
 	private double weight;
-	private ArrayList<String> hobbys;
+	private ArrayList<String> hobbies;
 	private BMICalculator bmiCalculator;
 	
 	public void getInfo() {
 		System.out.println("이름 : " + name);
 		System.out.println("키 : " + height);
 		System.out.println("몸무게 : " + weight);
-		System.out.println("취미 : " + hobbys);
+		System.out.println("취미 : " + hobbies);
 		bmiCalculation();
 	}
 
@@ -46,12 +46,13 @@ public class MyInfo {
 		this.weight = weight;
 	}
 
-	public ArrayList<String> getHobbys() {
-		return hobbys;
+
+	public ArrayList<String> getHobbies() {
+		return hobbies;
 	}
 
-	public void setHobbys(ArrayList<String> hobbys) {
-		this.hobbys = hobbys;
+	public void setHobbies(ArrayList<String> hobbies) {
+		this.hobbies = hobbies;
 	}
 
 	public BMICalculator getBmiCalculator() {
