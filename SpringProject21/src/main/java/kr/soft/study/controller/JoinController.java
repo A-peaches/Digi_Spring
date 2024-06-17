@@ -1,4 +1,4 @@
-package kr.soft.study;
+package kr.soft.study.controller;
 
 import javax.servlet.http.HttpServletRequest;
 

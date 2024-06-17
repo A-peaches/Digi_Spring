@@ -10,6 +10,7 @@ public class MainClass {
 			= new GenericXmlApplicationContext("classpath:applicationCTX.xml");
 		
 		AdminConnection connection = ctx.getBean("adminConnection", AdminConnection.class);
+		
 		System.out.println("adminId : " + connection.getAdminId());
 		System.out.println("adminPw : " + connection.getAdminPw());
 		System.out.println("sub_adminId : " + connection.getSub_adminId());
