@@ -19,3 +19,5 @@
 /.metadata/
 /.metadata/
 /.metadata/
+/.metadata/
+**/servlet-context.xml
