@@ -22,11 +22,12 @@ public class LoginAction implements Command {
 		UserDAO userDao = new UserDAO();
 
 		boolean result = false;
-		
+		boolean isAdmin = false;
 		String user_id = request.getParameter("user_id");
 		String user_pw = request.getParameter("user_pw");		
 
 		result = userDao.loginCheck(user_id,user_pw);
+		isAdmin = userDao.adminCheck(user_id);
 		
 		if(!result) {
             model.addAttribute("message", "ID 또는 PW가 일치하지 않습니다!");
@@ -39,6 +40,7 @@ public class LoginAction implements Command {
 		HttpSession session = request.getSession();
 		session.setAttribute("user_id",user_id);
 		session.setAttribute("user_pw",user_pw);
+		session.setAttribute("user_pw",isAdmin);
 	}
 
 }

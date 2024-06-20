@@ -1,5 +1,6 @@
 package kr.soft.study.user.action;
 
+import java.sql.SQLException;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,11 +23,19 @@ public class LoginAction implements Command {
 		UserDAO userDao = new UserDAO();
 
 		boolean result = false;
+		boolean isAdmin = false;
 		
 		String user_id = request.getParameter("user_id");
 		String user_pw = request.getParameter("user_pw");		
 
-		result = userDao.loginCheck(user_id,user_pw);
+		
+		try {
+			result = userDao.loginCheck(user_id,user_pw);
+			isAdmin = userDao.adminCheck(user_id);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("로그인 실패!");
+		}
 		
 		if(!result) {
             model.addAttribute("message", "ID 또는 PW가 일치하지 않습니다!");
@@ -39,6 +48,7 @@ public class LoginAction implements Command {
 		HttpSession session = request.getSession();
 		session.setAttribute("user_id",user_id);
 		session.setAttribute("user_pw",user_pw);
-	}
+		session.setAttribute("isAdmin",isAdmin);
 
+	}
 }

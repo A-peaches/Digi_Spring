@@ -1,293 +1,120 @@
 package kr.soft.study.user.db;
 
-
 import java.sql.*;
 
 import javax.naming.*;
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
+
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementSetter;
+import org.springframework.jdbc.core.RowMapper;
+
+import kr.soft.study.Constant;
+
 import java.util.*;
 
 public class UserDAO {
-	Connection con;
-	PreparedStatement pstmt;
-	ResultSet rs;
-	
-	DataSource ds;
+
+	JdbcTemplate template;
+
 	public UserDAO() {
-		try {
-			Context init = new InitialContext();
-			ds = (DataSource) init.lookup("java:comp/env/jdbc/MysqlDB");
-			
-			//con = ds.getConnection();
-			System.out.println("DB Connect Success!");
-		} catch (Exception ex) {
-			System.out.println("DB Connect Fail " + ex);
-			return;
-		}
+		template = Constant.template;
 	}
-	public boolean addMember(UserDTO joinData) {
-		int result = 0;
-		
+
+	public boolean addMember(final UserDTO joinData) {
 		String sql = "insert into userInfo (user_id, user_name, user_pw, user_email, birth, hobby, info) values"
 				+ "(?,?,?,?,?,?,?)";
 		try {
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1,joinData.getUser_id());
-			pstmt.setString(2, joinData.getUser_name());
-			pstmt.setString(3, joinData.getUser_pw());
-			pstmt.setString(4, joinData.getUser_email());
-			pstmt.setString(5, joinData.getBirth());
-			pstmt.setString(6, joinData.getHobby());
-			pstmt.setString(7, joinData.getInfo());
-			
-			result = pstmt.executeUpdate();
-			if(result ==0) return false;
-			
-			return true;
-		} catch (SQLException e) {
-			System.out.println("addMember Error!: "+ e);
-		} finally {
-			if (rs != null)
-				try {
-					rs.close();
-				} catch (SQLException ex) {
+			int result = template.update(sql, new PreparedStatementSetter() {
+
+				@Override
+				public void setValues(PreparedStatement ps) throws SQLException {
+					ps.setString(1, joinData.getUser_id());
+					ps.setString(2, joinData.getUser_name());
+					ps.setString(3, joinData.getUser_pw());
+					ps.setString(4, joinData.getUser_email());
+					ps.setString(5, joinData.getBirth());
+					ps.setString(6, joinData.getHobby());
+					ps.setString(7, joinData.getInfo());
 				}
-			if (pstmt != null)
-				try {
-					pstmt.close();
-				} catch (SQLException ex) {
-			}
-			if(con != null)
-				try {
-					con.close();
-				} catch(SQLException ex) {
-					
-			}
+
+			});
+			return result > 0;
+		} catch (Exception e) {
+			System.out.println("addMember Error!: " + e);
+			return false;
 		}
 
-	
-		return false;
 	}
+
 	public boolean loginCheck(String user_id, String user_pw) {
-		String sql = "Select user_id, isadmin from userInfo where user_id = ? AND user_pw = ?";
-		
-		try {
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(sql);
-			
-			pstmt.setString(1, user_id);
-			pstmt.setString(2, user_pw);
-			
-			rs = pstmt.executeQuery();
-			rs.next();
-		
-			if(rs.getString(1).equals(user_id)) {
-				return true;
-			}
-			
-			
-		} catch(SQLException ex){
-			System.out.println("loginCheck Error! : "+ex);
-		}finally {
-			if (rs != null)
-				try {
-					rs.close();
-				} catch (SQLException ex) {
-				}
-			if (pstmt != null)
-				try {
-					pstmt.close();
-				} catch (SQLException ex) {
-			}
-			if(con != null)
-				try {
-					con.close();
-				} catch(SQLException ex) {
-					
-			}
-		}
+		String sql = "Select user_id from userInfo where user_id = ? AND user_pw = ?";
 
-		return false;
+		try {
+			String dbUserId = template.queryForObject(sql, new Object[] { user_id, user_pw }, new RowMapper<String>() {
+
+				@Override
+				public String mapRow(ResultSet rs, int rowNum) throws SQLException {
+					return rs.getString("user_id");
+				}
+			});
+			return dbUserId.equals(user_id);
+
+		} catch (Exception e) {
+			System.out.println("loginCheck Error!: " + e);
+			return false;
+		}
 	}
+
 	public UserDTO getUserInfo(String user_id) {
 		String sql = "select * from userInfo where user_id = ?";
-		UserDTO loginData = new UserDTO();
-		
-		try {
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, user_id);
-			
-			rs = pstmt.executeQuery();
-			
-			
-			if(rs.next()) {
-				loginData.setUser_id(rs.getString("user_id"));
-				loginData.setUser_pw(rs.getString("user_pw"));
-				loginData.setUser_email(rs.getString("user_email"));
-				loginData.setUser_name(rs.getString("user_name"));
-				loginData.setBirth(rs.getString("birth"));
-				loginData.setHobby(rs.getString("hobby"));
-				loginData.setInfo(rs.getString("info"));
-				loginData.setIsadmin(rs.getBoolean("isadmin"));
-			} else {
-				System.out.println("User is null");
-				return null;
-			}
-			
-			return loginData;
-			
-		} catch(SQLException ex){
-			System.out.println("loginCheck Error! : "+ex);
-		}finally {
-			if (rs != null)
-				try {
-					rs.close();
-				} catch (SQLException ex) {
-				}
-			if (pstmt != null)
-				try {
-					pstmt.close();
-				} catch (SQLException ex) {
-			}
-			if(con != null)
-				try {
-					con.close();
-				} catch(SQLException ex) {
-					
-			}
-		}
-		return null;
+	      try {
+	            return template.queryForObject(sql, new Object[]{user_id}, new BeanPropertyRowMapper<UserDTO>(UserDTO.class));
+	        } catch (Exception e) {
+	            System.out.println("getUserInfo Error!: " + e);
+	            return null;
+	        }
 	}
-	public boolean adminCheck(String user_id) {
+
+	public boolean adminCheck(String user_id) throws SQLException {
 		String sql = "select isadmin from userInfo where user_id = ?";
-		UserDTO loginData = new UserDTO();
-		
+		boolean isAdmin = false;
+
 		try {
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, user_id);
-			
-			rs = pstmt.executeQuery();
-			
-			
-			if(rs.next()) {
-				return rs.getBoolean(1);
-			} else {
-				System.out.println("It's not Admin.");
-				return false;
+		isAdmin = template.queryForObject(sql, new Object[] {user_id}, new RowMapper<Boolean>() {
+			@Override
+			public Boolean mapRow(ResultSet rs, int rowNum) throws SQLException {
+				return rs.getBoolean("isadmin");
 			}
-			
-			
-		} catch(SQLException ex){
-			System.out.println("loginCheck Error! : "+ex);
-		}finally {
-			if (rs != null)
-				try {
-					rs.close();
-				} catch (SQLException ex) {
-				}
-			if (pstmt != null)
-				try {
-					pstmt.close();
-				} catch (SQLException ex) {
-			}
-			if(con != null)
-				try {
-					con.close();
-				} catch(SQLException ex) {
-					
-			}
+		});
+		} catch(Exception ex) {
+			System.out.println("adminCheck Error! : "+ ex);
 		}
-		return false;
+		
+		return isAdmin;
 	}
-	
+
 	public ArrayList<UserDTO> getMemberList() {
-		String sql = "select * from userInfo where isadmin=0";
-		ArrayList<UserDTO> list = new ArrayList<UserDTO>();
+		String sql = "select * from userInfo where isadmin = 0";
+		return (ArrayList<UserDTO>) template.query(sql, new BeanPropertyRowMapper<UserDTO>(UserDTO.class));
 		
-		try {
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(sql);
-			rs = pstmt.executeQuery();
-			
-	
-			while(rs.next()) {
-				UserDTO loginData = new UserDTO();
-				loginData.setUser_id(rs.getString("user_id"));
-				loginData.setUser_pw(rs.getString("user_pw"));
-				loginData.setUser_email(rs.getString("user_email"));
-				loginData.setUser_name(rs.getString("user_name"));
-				loginData.setBirth(rs.getString("birth"));
-				loginData.setHobby(rs.getString("hobby"));
-				loginData.setInfo(rs.getString("info"));
-				loginData.setIsadmin(rs.getBoolean("isadmin"));
-				list.add(loginData);
-			}
-			
-			return list;
-			
-		} catch (SQLException ex) {
-			System.out.println("loginCheck Error! : " + ex);
-		} finally {
-			if (rs != null)
-				try {
-					rs.close();
-				} catch (SQLException ex) {
-				}
-			if (pstmt != null)
-				try {
-					pstmt.close();
-				} catch (SQLException ex) {
-				}
-			if (con != null)
-				try {
-					con.close();
-				} catch (SQLException ex) {
-
-				}
-		}
-
-		return null;
 	}
+
 	public int memberDelete(String user_id) {
 		String sql = "delete from userInfo where user_id =?";
 		int result = 0;
-		
+
 		try {
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, user_id);
-			
-			result = pstmt.executeUpdate();
+	        result = template.update(sql, user_id);
+	        return result;
 
-			return result;
-			
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			System.out.println("MemberDelete Error! : " + e);
-		} finally {
-			if (rs != null)
-				try {
-					rs.close();
-				} catch (SQLException ex) {
-				}
-			if (pstmt != null)
-				try {
-					pstmt.close();
-				} catch (SQLException ex) {
-				}
-			if (con != null)
-				try {
-					con.close();
-				} catch (SQLException ex) {
-
-				}
-		}
+		} 
 		
 		return result;
 	}
 
 }
-	
