@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.*" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +13,7 @@
 	<script>
 		function onCheck(){
 			alert("결제가 완료되었습니다!");
-			window.location.href = "/list";
+			window.location.href = "check";
 		}
 	</script>
 </head>	
@@ -27,32 +28,16 @@
 			<td>제품가격</td>
 			<td class='w-25'>수량</td>
 		</tr>
+		<c:forEach items="${list}" var="li">
 		<tr>
 			<td style="font-size :40pt">🍪</td>
-			<td>AmericanCookie</td>
-			<td>3,000원</td>
+			<td>${li.cookie_name }</td>
+			<td>${li.cookie_price }원</td>
 			<td>
-				${list.count}개
+				${li.cookie_cnt}개
 			</td>
 		</tr>
-		<tr>
-			<td style="font-size :40pt">🍪</td>
-			<td>DoubleChocoCookie</td>
-			<td>2,800원</td>
-			<td>
-				<div class="counter-wrapper">
-								${list.count}개
-				</div>
-			</td>
-		</tr>
-		<tr>
-			<td style="font-size :40pt">🍪</td>
-			<td>OtmealCookie</td>
-			<td>2,600원</td>
-			<td>
-				${list.count}개
-			</td>
-		</tr>
+		</c:forEach>
 	</table>
 		<input type='button' name='intoCart' onClick="onCheck()" class="btn btn-primary" value="결제" style="margin-top:20px"/><br>
 	</form>

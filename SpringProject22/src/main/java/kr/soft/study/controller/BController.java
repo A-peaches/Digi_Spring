@@ -51,7 +51,6 @@ public class BController {
 	@RequestMapping("/write")
 	public String write(HttpServletRequest request, Model model) {
 		System.out.println("write()");
-		
 		model.addAttribute("request", request);
 		command = new BWriteCommand();
 		command.execute(model);

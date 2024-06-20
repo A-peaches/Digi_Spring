@@ -1,0 +1,5 @@
+eclipse.preferences.version=1
+encoding//src/main/java/kr/soft/study/basket/db/BasketDAO.java=UTF-8
+encoding//src/main/java/kr/soft/study/basket/db/BasketDTO.java=UTF-8
+encoding//src/main/java/kr/soft/study/board/db/BoardDAO.java=UTF-8
+encoding//src/main/java/kr/soft/study/user/db/UserDAO.java=UTF-8

@@ -67,7 +67,7 @@
 	<div class="text-center">
 	<h3 class="text-center my-3" >CookieList</h3>
 	<hr/>
-	<form name="List" method ="post" action="cookieCart.jsp" onsubmit="return isEmpty()">
+	<form name="List" method ="post" action="addCart" onsubmit="return isEmpty()">
 	<table class="table table-hover w-75 mx-auto">
 		<tr>
 			<td>제품 사진</td>

@@ -1,0 +1,12 @@
+eclipse.preferences.version=1
+encoding//src/main/java/kr/soft/study/basket/db/BasketDAO.java=UTF-8
+encoding//src/main/java/kr/soft/study/basket/db/BasketDTO.java=UTF-8
+encoding//src/main/java/kr/soft/study/board/db/BoardDAO.java=UTF-8
+encoding//src/main/java/kr/soft/study/user/db/UserDAO.java=UTF-8
+encoding//src/main/webapp/WEB-INF/views/loginState2.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/user/joinForm.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/user/loginForm.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/user/loginState.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/user/main.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/user/memberList.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/user/myPage.jsp=UTF-8

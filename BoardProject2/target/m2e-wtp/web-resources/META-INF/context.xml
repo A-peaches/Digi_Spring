@@ -1,0 +1,15 @@
+<Context>
+    <Resource name="jdbc/MysqlDB"
+              auth="Container"
+              driverClassName="com.mysql.cj.jdbc.Driver"
+              type="javax.sql.DataSource"
+              url="jdbc:mysql://118.37.94.80:551/apeach?serverTimezone=UTC&amp;useSSL=false"
+              username="root"
+              password="picipo12"
+              maxActive="20"
+              maxIdle="10"
+              maxWait="-1"/>
+</Context>
+
+<!-- &amp; 사용: XML에서 & 문자는 엔티티 참조를 나타내므로, 이를 문자 그대로 사용하려면 &amp;로 변경합니다. -->
+<!-- 시간문제가 있으면 Asia/Seoul 로 변경할 것. -->

@@ -4,10 +4,12 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import kr.soft.study.dao.BDao;
 
+@Service
 public class BWriteCommand implements BCommand{
 
 	@Override
@@ -15,6 +17,7 @@ public class BWriteCommand implements BCommand{
 		// TODO Auto-generated method stub
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest request = (HttpServletRequest)map.get("request");
+		
 		String bName = request.getParameter("bName");
 		String bTitle = request.getParameter("bTitle");
 		String bContent = request.getParameter("bTitle");

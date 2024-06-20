@@ -1,0 +1,30 @@
+@charset "UTF-8";
+
+@import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap');
+
+.gowun-dodum-regular {
+  font-family: "Gowun Dodum", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+* {
+	font-family : "Gowun Dodum";
+	text-align : center;
+}
+
+table {
+	border-collapse: collapse;
+	margin:auto; 
+}
+
+#title  {
+    font-weight: bold; /* 폰트 두께 */
+    font-size: 2.5em; /* 폰트 크기 */
+    margin-top: 20px; /* 위쪽 마진 */
+    margin-bottom: 20px; /* 아래쪽 마진 */
+	}
+
+/* input {
+	box-sizing: border-box;
+} */
