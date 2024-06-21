@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -36,6 +37,7 @@ import kr.soft.study.command.Command;
 
 
 @Controller
+@PropertySource("classpath:application.properties")
 public class BoardController {
 	
 	Command command = null;
@@ -168,10 +170,12 @@ public class BoardController {
 		return "redirect:boardList";
 	}
 	
-	private String context = "C:\\library\\upload\\";
+	@Value("${file.upload.path}")
+	private String context;
 
 	@RequestMapping("/download")
 	public ResponseEntity<InputStreamResource> fileDownload(@RequestParam String fileName) throws IOException {
+		System.out.println(context);
 		String filePath = context + fileName;
 		System.out.println("File path: " + filePath);
 		File file = new File(filePath);
