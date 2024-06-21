@@ -12,8 +12,8 @@ public class UserDAO {
 	Connection con;
 	PreparedStatement pstmt;
 	ResultSet rs;
-	
 	DataSource ds;
+	
 	public UserDAO() {
 		try {
 			Context init = new InitialContext();
@@ -97,7 +97,7 @@ public class UserDAO {
 				} catch (SQLException ex) {
 				}
 			if (pstmt != null)
-				try {
+				try {                       
 					pstmt.close();
 				} catch (SQLException ex) {
 			}

@@ -1,17 +1,28 @@
 package kr.soft.study;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.soft.study.board.action.BoardAddAction;
 import kr.soft.study.board.action.BoardDeleteAction;
@@ -155,5 +166,20 @@ public class BoardController {
 
         
 		return "redirect:boardList";
+	}
+	
+	private String context = "C:\\library\\upload\\";
+
+	@RequestMapping("/download")
+	public ResponseEntity<InputStreamResource> fileDownload(@RequestParam String fileName) throws IOException {
+		String filePath = context + fileName;
+		System.out.println("File path: " + filePath);
+		File file = new File(filePath);
+		InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
+
+		return ResponseEntity.ok()
+				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + file.getName())
+				.contentType(MediaType.APPLICATION_OCTET_STREAM)
+				.contentLength(file.length()).body(resource);
 	}
 }

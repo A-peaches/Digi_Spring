@@ -85,8 +85,8 @@ div {
 					test="${not empty boardDto.BOARD_FILE}">
 					<%-- 		<%if(!(board.getBOARD_FILE()==null)){ %> --%>
 					<a
-						href="${pageContext.request.contextPath}/libraryUploadImg/${boardDto.BOARD_FILE}">${boardDto.BOARD_FILE}
-					</a>
+						href="download?fileName=${boardDto.BOARD_FILE}">${boardDto.BOARD_FILE}</a>
+
 					<%-- 		<img src="${pageContext.request.contextPath}/libraryUploadImg/apeach5.gif" /> --%>
 				</c:if> <%-- <%} else { %> --%> <c:if test="${empty boardDto.BOARD_FILE}">
 		첨부파일 없음
