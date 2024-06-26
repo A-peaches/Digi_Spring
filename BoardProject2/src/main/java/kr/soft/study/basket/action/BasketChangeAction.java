@@ -23,7 +23,6 @@ public class BasketChangeAction implements Command {
 		HttpSession session = (HttpSession)map.get("session");
 		HttpServletRequest request = (HttpServletRequest)map.get("request");
 
-		String cookie_name = request.getParameter("cookie_name");
 		String user_id = (String) session.getAttribute("user_id");
 		ArrayList<BasketDTO> basketList = new ArrayList<BasketDTO>();
 		

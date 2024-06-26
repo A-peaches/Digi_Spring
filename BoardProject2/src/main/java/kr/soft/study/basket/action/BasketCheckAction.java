@@ -15,7 +15,7 @@ public class BasketCheckAction implements Command {
 
 	@Override
 	public void execute(Model model) {
-		BasketDTO basketDto = new BasketDTO();
+
 		BasketDAO basketDao = new BasketDAO();
 		
 		Map<String, Object> map = model.asMap();

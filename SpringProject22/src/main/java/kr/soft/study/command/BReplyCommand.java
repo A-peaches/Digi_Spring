@@ -6,7 +6,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.ui.Model;
 
-import kr.soft.study.dao.BDao;
+import kr.soft.study.controller.Constant;
+import kr.soft.study.dao.IDao;
+
 
 public class BReplyCommand implements BCommand{
 
@@ -24,8 +26,8 @@ public class BReplyCommand implements BCommand{
 		String bStep = request.getParameter("bStep");
 		String bIndent = request.getParameter("bIndent");
 		
-		BDao dao = new BDao();
-		dao.reply(bId, bName, bTitle, bContent, bGroup, bStep, bIndent);
+		IDao dao = Constant.dao;
+		dao.reply(bName, bTitle, bContent, bGroup, bStep, bIndent);
 		
 
 	}

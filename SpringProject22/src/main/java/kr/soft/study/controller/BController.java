@@ -2,12 +2,13 @@ package kr.soft.study.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
 
 import kr.soft.study.command.BCommand;
 import kr.soft.study.command.BContentCommand;
@@ -17,19 +18,20 @@ import kr.soft.study.command.BModifyCommand;
 import kr.soft.study.command.BReplyCommand;
 import kr.soft.study.command.BReplyViewCommand;
 import kr.soft.study.command.BWriteCommand;
+import kr.soft.study.dao.IDao;
 
 @Controller
 public class BController {
 	
 	BCommand command = null;
 	
-	private JdbcTemplate template;
 	
-	//이미 생성된 template 빈즈를 자동으로 불러오게끔 어노테이션 작성.
+	private final SqlSession sqlSession;
+
 	@Autowired
-	public void setTemplate(JdbcTemplate template) {
-		this.template = template;
-		Constant.template = this.template;
+	public BController(SqlSession sqlSession) {
+        this.sqlSession = sqlSession;
+        Constant.dao = sqlSession.getMapper(IDao.class);
 	}
 	
 	@RequestMapping("/list")

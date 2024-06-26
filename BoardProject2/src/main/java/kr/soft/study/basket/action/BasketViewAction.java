@@ -19,7 +19,7 @@ public class BasketViewAction implements Command {
 		HttpSession session = (HttpSession)map.get("session");
 		String user_id = (String) session.getAttribute("user_id");
 		
-		BasketDTO basketDto = new BasketDTO();
+
 		BasketDAO basketDao = new BasketDAO();
 		
 		ArrayList<BasketDTO> basketList = new ArrayList<BasketDTO>();

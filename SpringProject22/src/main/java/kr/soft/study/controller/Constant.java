@@ -1,9 +1,8 @@
 package kr.soft.study.controller;
-
-import org.springframework.jdbc.core.JdbcTemplate;
+import kr.soft.study.dao.IDao;
 
 public class Constant {
 	
-	public static JdbcTemplate template;
+	public static IDao dao;
 	
 }

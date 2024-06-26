@@ -7,7 +7,10 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
-import kr.soft.study.dao.BDao;
+import kr.soft.study.controller.Constant;
+import kr.soft.study.dao.IDao;
+
+
 
 @Service
 public class BWriteCommand implements BCommand{
@@ -23,8 +26,9 @@ public class BWriteCommand implements BCommand{
 		String bContent = request.getParameter("bTitle");
 		
 		System.out.println(bName);
-		BDao dao = new BDao();
-		dao.write(bName, bTitle, bContent);
+		IDao dao = Constant.dao;
+		int maxCount = dao.maxCount(); 
+		dao.write(maxCount, bName, bTitle, bContent);
 	}
 
 }

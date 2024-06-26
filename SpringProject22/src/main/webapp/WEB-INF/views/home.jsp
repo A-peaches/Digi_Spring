@@ -3,12 +3,12 @@
 <html>
 <head>
 	<title>Home</title>
+<script>
+	function showPage() {
+		window.location.href="./list"
+	}
+</script>
 </head>
-<body>
-<h1>
-	Hello world!  
-</h1>
-
-<P>  The time on the server is ${serverTime}. </P>
+<body onload="showPage()">
 </body>
 </html>

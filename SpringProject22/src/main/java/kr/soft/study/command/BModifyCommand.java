@@ -6,7 +6,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.ui.Model;
 
-import kr.soft.study.dao.BDao;
+import kr.soft.study.controller.Constant;
+import kr.soft.study.dao.IDao;
 
 public class BModifyCommand implements BCommand{
 
@@ -15,13 +16,13 @@ public class BModifyCommand implements BCommand{
 
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
-		String bId = request.getParameter("bId");
+		int bId = Integer.parseInt(request.getParameter("bId"));
 		String bName = request.getParameter("bName");
 		String bTitle = request.getParameter("bTitle");
 		String bContent = request.getParameter("bContent");
 		
-		BDao  dao = new BDao();
-		dao.modify(bId, bName, bTitle, bContent);
+		IDao dao = Constant.dao;
+		dao.modify(bName, bTitle, bContent,bId);
 	}
 
 }

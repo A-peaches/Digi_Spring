@@ -6,19 +6,20 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.ui.Model;
 
-import kr.soft.study.dao.BDao;
+import kr.soft.study.controller.Constant;
+import kr.soft.study.dao.IDao;
 
 public class BDeleteCommand implements BCommand{
 
 	@Override
 	public void execute(Model model) {
-		// TODO Auto-generated method stub
+		
 		
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
 		
 		String bId = request.getParameter("bId");
-		BDao dao = new BDao();
+		IDao dao = Constant.dao;
 		dao.delete(bId);
 		
 	}

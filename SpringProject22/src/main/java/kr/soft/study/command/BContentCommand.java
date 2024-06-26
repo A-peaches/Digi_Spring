@@ -6,7 +6,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.ui.Model;
 
-import kr.soft.study.dao.BDao;
+import kr.soft.study.controller.Constant;
+import kr.soft.study.dao.IDao;
 import kr.soft.study.dto.BDto;
 
 public class BContentCommand implements BCommand{
@@ -18,7 +19,8 @@ public class BContentCommand implements BCommand{
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
 		String bId = request.getParameter("bId");
 		
-		BDao dao = new BDao();
+		IDao dao = Constant.dao;
+		dao.upHit(bId);
 		BDto dto = dao.contentView(bId);
 		
 		model.addAttribute("content",dto);

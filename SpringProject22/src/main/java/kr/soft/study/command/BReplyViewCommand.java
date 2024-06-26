@@ -6,7 +6,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.ui.Model;
 
-import kr.soft.study.dao.BDao;
+import kr.soft.study.controller.Constant;
+import kr.soft.study.dao.IDao;
 import kr.soft.study.dto.BDto;
 
 public class BReplyViewCommand implements BCommand{
@@ -18,7 +19,7 @@ public class BReplyViewCommand implements BCommand{
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
 		String bId = request.getParameter("bId");
 		
-		BDao dao = new BDao();
+		IDao dao = Constant.dao;
 		BDto dto = dao.reply_view(bId);
 		
 		model.addAttribute("reply_view", dto);

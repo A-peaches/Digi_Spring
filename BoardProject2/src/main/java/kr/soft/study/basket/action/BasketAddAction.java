@@ -25,8 +25,8 @@ public class BasketAddAction implements Command {
 		HttpServletRequest request = (HttpServletRequest)map.get("request");
 		
 		String user_id = (String) session.getAttribute("user_id");
-		ArrayList<BasketDTO> basketList = new ArrayList<BasketDTO>();
-		ArrayList<BasketDTO> existBasket = new ArrayList<BasketDTO>();
+		ArrayList<BasketDTO> basketList = null;
+		ArrayList<BasketDTO> existBasket = null;
 		existBasket = basketDao.getBasket(user_id);
 		
 		int ameCnt = Integer.parseInt(request.getParameter("AmeCnt"));
@@ -56,7 +56,6 @@ public class BasketAddAction implements Command {
 
 		basketList = basketDao.basketInsert(user_id, ameCnt, doubleCnt, otmealCnt);
 		
-		model.addAttribute("basketList", basketList);
 	}
 
 }
